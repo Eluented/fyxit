@@ -21,6 +21,6 @@
 body {
   @apply text-fyx-blue; /* This sets default text color */
   font-family: Arial, Helvetica, sans-serif;
-  background: #333c42;
+  background: #3c5564;
   color: #f7f8f7;
 }

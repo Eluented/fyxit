@@ -1,17 +1,16 @@
 "use client";
 import Navbar from "@/components/Navbar";
-import { Icon } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
 
 export default function Home() {
   const videoRef = useRef(null);
 
-  // Optional: Handle video autoplay on iOS
+
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.defaultMuted = true; // Required for autoplay on many browsers
-      videoRef.current.playsInline = true; // Required for iOS
+      videoRef.current.defaultMuted = true; 
+      videoRef.current.playsInline = true; 
     }
   }, []);
 
@@ -93,6 +92,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Informatics section */}
+      <div className="h-screen"> test</div>
     </>
   );
 }
