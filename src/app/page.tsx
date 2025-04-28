@@ -1,66 +1,98 @@
+"use client";
 import Navbar from "@/components/Navbar";
-import RotatingTagline from "@/components/RotatingTagline";
+import { Icon } from "@chakra-ui/react";
 import Image from "next/image";
+import { useRef, useEffect } from "react";
 
 export default function Home() {
+  const videoRef = useRef(null);
+
+  // Optional: Handle video autoplay on iOS
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true; // Required for autoplay on many browsers
+      videoRef.current.playsInline = true; // Required for iOS
+    }
+  }, []);
+
   return (
     <>
       <Navbar />
-      <div className="flex flex-col md:flex-row items-center  md:justify-around max-w-[1330px] mx-auto h-screen w-full">
-        <div className="p-8 w-full md:max-w-md text-center md:text-left">
-          {/* Text container with fixed height */}
-          <div className="min-h-[160px] md:min-h-[300px] flex flex-col justify-between">
-            <div className="h-full flex items-center">
-              <RotatingTagline />
+
+      {/* Video Background Container */}
+      <div className="relative h-screen w-full overflow-hidden">
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
+
+        {/* Background Video */}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source
+            src="/videos/8965388-uhd_3840_2160_25fps.mp4"
+            type="video/mp4"
+          />
+          {/* Fallback image if video fails to load */}
+          <Image
+            src="/images/tradesman.png"
+            alt="Tradespeople at work"
+            fill
+            className="object-cover"
+          />
+        </video>
+
+        {/* Content Container */}
+        <div className="relative z-20  h-full w-full flex  items-center justify-center">
+          <div className=" max-w-[1700px] text-center  ">
+            {" "}
+            {/* <RotatingTagline /> */}
+            <h1 className="text-8xl uppercase font-sans text-shadow-black text-shadow-md">
+              Empowering Tradespeople{" "}
+            </h1>
+            <h1 className="text-8xl uppercase font-sans text-shadow-black text-shadow-md">
+              Show Your Craft
+            </h1>
+            <div className="flex items-center justify-center">
+              {" "}
+              <h1 className="text-8xl uppercase font-sans text-fyx-yellow backdrop-blur-2xl text-shadow-black text-shadow-sm  px-4">
+                Get Hired.
+              </h1>
             </div>
-            {/* Button positioned below */}
-            <div className="mt-4 md:mt-6 w-full">
-              <button className="bg-fyx-yellow text-white px-12 py-4  rounded-lg text-3xl font-semibold hover:bg-opacity-90 transition-all">
-                Get Fyxit Now
-              </button>
-
-              <div className="flex gap-4 justify-between mt-[-40px] ">
-                <a
-                  href="YOUR_APP_STORE_LINK"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-[200px] h-[200px] relative"
-                >
-                  <Image
-                    src="/images/download-on-the-app-store-apple-logo-svgrepo-com.svg"
-                    alt="Download on the App Store"
-                    fill
-                  />
-                </a>
-
-                <a
-                  href="YOUR_GOOGLE_PLAY_LINK"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-[200px] h-[200px] relative"
-                >
-                  <Image
-                    src="/images/google-play-badge-logo-svgrepo-com.svg"
-                    alt="Get it on Google Play"
-                    fill
-                  />
-                </a>
-              </div>
+            <div className="pt-8 font-mono text-xl tracking-tight text-shadow-black text-shadow-md font-semibold">
+              <p>
+                Fyxit is a social platform designed to bridge the gap between
+                craftsmanship and community — helping professionals grow their
+                brand, share their work, and gain the recognition they deserve.
+                Stay tuned and be part of the future of trades!
+              </p>
+              <p></p>
             </div>
           </div>
-        </div>
-        <div className="relative h-[100vh]  md:w-6/10 overflow-hidden rounded-none md:rounded-xl">
-          <div className="absolute w-full h-full">
-            <Image
-              src="/images/tradesman3.png"
-              alt="Fyxit tradesperson"
-              fill
-              className="object-cover"
-            />
+
+          <div className="absolute bottom-0 pb-2 flex flex-col justify-center items-center">
+            <div><p className="font-mono font-semibold text-shadow-black text-shadow-xs text-sm pb-0.5">Scroll down to see more</p></div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.8}
+              stroke="currentColor"
+              className="size-8 text-shadow-black text-shadow-xs"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
           </div>
         </div>
       </div>
-      <div className="h-screen">text</div>
     </>
   );
 }

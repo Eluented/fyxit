@@ -4,10 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const taglines = [
-  "Need a builder? Fyxit.",
-  "Find a plumber? Fyxit.",
-  "DIY fail? Fyxit.",
-  "Problem? Fyxit.",
+  "Need a Builder? Fyxit.",
+  "Get Seen. Get Hired.",
+  "Show Your Worth.",
 ];
 
 export default function RotatingTagline() {
@@ -20,14 +19,15 @@ export default function RotatingTagline() {
     return () => clearInterval(interval);
   }, []);
 
-  // Function to split the tagline and wrap "Fyxit." in a span
+  // Function to split the tagline and make last word yellow
   const renderTagline = (tagline: string) => {
-    const parts = tagline.split("Fyxit.");
+    const words = tagline.split(" ");
+    const lastWord = words.pop(); // Remove the last word
+
     return (
       <>
-        {parts[0]}
-        <span className="text-fyx-yellow">Fyxit.</span>
-        {parts[1]}
+        {words.join(" ")} {/* All words except last */}
+        <span className="text-fyx-yellow">{lastWord}</span>
       </>
     );
   };
@@ -41,7 +41,7 @@ export default function RotatingTagline() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-8xl font-bold"
+          className="text-4xl md:text-8xl font-bold "
         >
           {renderTagline(taglines[index])}
         </motion.h1>
