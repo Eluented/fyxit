@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 const taglines = [
   "Need a builder? Fyxit.",
-  "Struggling to find a plumber? Fyxit.",
+  "Find a plumber? Fyxit.",
   "DIY fail? Fyxit.",
-  "Problem? Fyxit."
+  "Problem? Fyxit.",
 ];
 
 export default function RotatingTagline() {
@@ -16,9 +16,21 @@ export default function RotatingTagline() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % taglines.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  // Function to split the tagline and wrap "Fyxit." in a span
+  const renderTagline = (tagline: string) => {
+    const parts = tagline.split("Fyxit.");
+    return (
+      <>
+        {parts[0]}
+        <span className="text-fyx-yellow">Fyxit.</span>
+        {parts[1]}
+      </>
+    );
+  };
 
   return (
     <div className="relative min-h-[96px]">
@@ -29,9 +41,9 @@ export default function RotatingTagline() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-6xl font-bold text-gray-900"
+          className="text-4xl md:text-8xl font-bold"
         >
-          {taglines[index]}
+          {renderTagline(taglines[index])}
         </motion.h1>
       </AnimatePresence>
     </div>
