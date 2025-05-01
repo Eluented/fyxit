@@ -1,4 +1,7 @@
 "use client";
+import { Counter } from "@/components/Counter";
+import { FuturisticCounter } from "@/components/FuturisticCounter";
+import { HolographicCounter } from "@/components/HolographicCounter";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
@@ -6,18 +9,16 @@ import { useRef, useEffect } from "react";
 export default function Home() {
   const videoRef = useRef(null);
 
-
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.defaultMuted = true; 
-      videoRef.current.playsInline = true; 
+      videoRef.current.defaultMuted = true;
+      videoRef.current.playsInline = true;
     }
   }, []);
 
   return (
     <>
       <Navbar />
-
       {/* Video Background Container */}
       <div className="relative h-screen w-full overflow-hidden">
         {/* Dark Overlay */}
@@ -74,7 +75,11 @@ export default function Home() {
           </div>
 
           <div className="absolute bottom-0 pb-2 flex flex-col justify-center items-center">
-            <div><p className="font-mono font-semibold text-shadow-black text-shadow-xs text-sm pb-0.5">Scroll down to see more</p></div>
+            <div>
+              <p className="font-mono font-semibold text-shadow-black text-shadow-xs text-sm pb-0.5">
+                Scroll down to see more
+              </p>
+            </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -92,9 +97,34 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* Informatics section */}
-      <div className="h-screen"> test</div>
+      <div className="h-screen bg-gray-50 flex flex-col justify-center items-center">
+        <div className="grid grid-cols-3 gap-16 text-center max-w-6xl mx-auto">
+          {/* Stat 1 */}
+          <div className="flex flex-col items-center">
+            <span className="text-6xl font-bold text-fyx-yellow">
+              <HolographicCounter value={250} />+
+            </span>
+            <span className="text-xl mt-4 text-gray-700">Tradespeople</span>
+          </div>
+
+          {/* Stat 2 */}
+          <div className="flex flex-col items-center">
+            <span className="text-6xl font-bold text-fyx-yellow">
+              <FuturisticCounter value={250} />+
+            </span>
+            <span className="text-xl mt-4 text-gray-700">Jobs Completed</span>
+          </div>
+
+          {/* Stat 3 */}
+          <div className="flex flex-col items-center">
+            <span className="text-6xl font-bold text-fyx-yellow">
+              £<Counter value={100} />
+            </span>
+            <span className="text-xl mt-4 text-gray-700">Million Saved</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
