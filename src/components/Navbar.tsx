@@ -1,4 +1,4 @@
-'use client'; // Important for scroll interaction
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -6,41 +6,43 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Update state when scroll position changes
+  // Scroll behavior logic
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 50); // Change after 50px scroll
+    const previous = scrollY.getPrevious();
+
+    if (latest > previous && latest > 1000) {
+      setHidden(true); // scroll down
+    } else {
+      setHidden(false); // scroll up
+    }
+
+    setIsScrolled(latest > 50); // toggle blurred background
   });
 
   return (
     <motion.nav
-      className="w-full fixed h-[8rem] z-50 pt-4 font-sans"
-      initial={{ backgroundColor: 'rgba(0,0,0,0)', borderColor: 'rgba(255,255,255,0.1)' }}
-      animate={{
-        backgroundColor: isScrolled ? '#F5F5F0' : 'rgba(0,0,0,0)',
-        borderColor: isScrolled ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'
+      className={`w-full fixed z-50 h-[8rem] pt-4  transition-all duration-400 ${
+        isScrolled
+          ? " backdrop-blur-md  border-gray-200 "
+          : "bg-transparent "
+      }`}
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
       }}
-      transition={{
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1], // Custom easing for smooth transition
-        backgroundColor: { duration: 0.4 },
-        borderColor: { duration: 0.3 }
-      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ y: { duration: 0.35, ease: "easeInOut" } }}
     >
-      <div className="mx-auto px-12 sm:px-6 lg:px-8">
-        <motion.div 
-          className="flex justify-between items-center"
-          initial={{ opacity: 1 }}
-          animate={{
-            opacity: isScrolled ? 1 : 1 // Can add fade effects if needed
-          }}
-        >
-          {/* Logo - with color transition */}
+      <div className="mx-auto px-12 sm:px-6 lg:px-8 uppercase">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
           <motion.div
             animate={{
-              filter: isScrolled ? 'none' : 'brightness(0) invert(1)'
+              filter: isScrolled ? "none" : "brightness(0) invert(1)",
             }}
             transition={{ duration: 0.4 }}
           >
@@ -51,43 +53,39 @@ export default function Navbar() {
                 width={90}
                 height={90}
                 className="w-auto"
+                priority
               />
             </Link>
           </motion.div>
 
-          {/* Navigation links */}
-          <div className="flex gap-16 items-center text-xl">
-            <Link
-              href="/about"
-              className={`transition-colors duration-300 ${isScrolled ? 'text-gray-900 hover:text-fyx-yellow' : 'text-white hover:text-fyx-yellow'}`}
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              className={`transition-colors duration-300 ${isScrolled ? 'text-gray-900 hover:text-fyx-yellow' : 'text-white hover:text-fyx-yellow'}`}
-            >
-              Our Mission
-            </Link>
-            <Link
-              href="/contact"
-              className={`transition-colors duration-300 ${isScrolled ? 'text-gray-900 hover:text-fyx-yellow' : 'text-white hover:text-fyx-yellow'}`}
-            >
-              The Team
-            </Link>
-            <Link
-              href="/contact"
-              className={`transition-colors duration-300 ${isScrolled ? 'text-gray-900 hover:text-fyx-yellow' : 'text-white hover:text-fyx-yellow'}`}
-            >
-              Contact
-            </Link>
+          {/* Navigation Links */}
+          <div className="flex gap-16 items-center font-poppins text-xl font-bold tracking-widest ">
+            {[
+              { href: "/about", text: "About" },
+              { href: "/mission", text: "Our Mission" },
+              { href: "/team", text: "The Team" },
+              { href: "/contact", text: "Contact" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`transition-colors duration-300  `}
+              >
+                {link.text}
+              </Link>
+            ))}
           </div>
 
-          {/* CTA Button - maintains style */}
-          <button className="bg-fyx-yellow text-white px-8 py-3 rounded-lg text-xl font-semibold hover:bg-opacity-90 transition-all">
+          {/* CTA Button */}
+          <motion.button
+            className="bg-fyx-yellow text-white px-8 py-3 rounded-lg text-xl font-semibold  shadow-md"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
             Help Us
-          </button>
-        </motion.div>
+          </motion.button>
+        </div>
       </div>
     </motion.nav>
   );

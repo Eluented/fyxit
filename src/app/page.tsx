@@ -1,8 +1,13 @@
 "use client";
+
 import { Counter } from "@/components/Counter";
 import { FuturisticCounter } from "@/components/FuturisticCounter";
+import FyxitSplitScroll from "@/components/FyxitSplitScroll";
 import { HolographicCounter } from "@/components/HolographicCounter";
+import IndustryInsights from "@/components/IndustryInsights";
 import Navbar from "@/components/Navbar";
+import { ParticleCounter } from "@/components/ParticleCounter";
+
 import Image from "next/image";
 import { useRef, useEffect } from "react";
 
@@ -48,22 +53,22 @@ export default function Home() {
 
         {/* Content Container */}
         <div className="relative z-20  h-full w-full flex  items-center justify-center">
-          <div className=" max-w-[1700px] text-center  ">
+          <div className=" max-w-[1700px] text-center  font-heading">
             {" "}
             {/* <RotatingTagline /> */}
-            <h1 className="text-8xl uppercase font-sans text-shadow-black text-shadow-md">
+            <h1 className="text-8xl uppercase  text-shadow-black text-shadow-md">
               Empowering Tradespeople{" "}
             </h1>
-            <h1 className="text-8xl uppercase font-sans text-shadow-black text-shadow-md">
+            <h1 className="text-8xl uppercase  text-shadow-black text-shadow-md">
               Show Your Craft
             </h1>
             <div className="flex items-center justify-center">
               {" "}
-              <h1 className="text-8xl uppercase font-sans text-fyx-yellow backdrop-blur-2xl text-shadow-black text-shadow-sm  px-4">
+              <h1 className="text-8xl uppercase  text-fyx-yellow backdrop-blur-2xl text-shadow-black text-shadow-sm  px-4">
                 Get Hired.
               </h1>
             </div>
-            <div className="pt-8 font-mono text-xl tracking-tight text-shadow-black text-shadow-md font-semibold">
+            <div className="pt-8 font-poppins text-2xl  text-shadow-black text-shadow-md font-bold">
               <p>
                 Fyxit is a social platform designed to bridge the gap between
                 craftsmanship and community — helping professionals grow their
@@ -76,7 +81,7 @@ export default function Home() {
 
           <div className="absolute bottom-0 pb-2 flex flex-col justify-center items-center">
             <div>
-              <p className="font-mono font-semibold text-shadow-black text-shadow-xs text-sm pb-0.5">
+              <p className="font-poppins font-semibold text-shadow-black text-shadow-md text-sm pb-0.5 tracking-widest">
                 Scroll down to see more
               </p>
             </div>
@@ -98,32 +103,13 @@ export default function Home() {
         </div>
       </div>
       {/* Informatics section */}
-      <div className="h-screen bg-gray-50 flex flex-col justify-center items-center">
-        <div className="grid grid-cols-3 gap-16 text-center max-w-6xl mx-auto">
-          {/* Stat 1 */}
-          <div className="flex flex-col items-center">
-            <span className="text-6xl font-bold text-fyx-yellow">
-              <HolographicCounter value={250} />+
-            </span>
-            <span className="text-xl mt-4 text-gray-700">Tradespeople</span>
-          </div>
 
-          {/* Stat 2 */}
-          <div className="flex flex-col items-center">
-            <span className="text-6xl font-bold text-fyx-yellow">
-              <FuturisticCounter value={250} />+
-            </span>
-            <span className="text-xl mt-4 text-gray-700">Jobs Completed</span>
-          </div>
+      {/* Informatics Section - Industry Insights */}
 
-          {/* Stat 3 */}
-          <div className="flex flex-col items-center">
-            <span className="text-6xl font-bold text-fyx-yellow">
-              £<Counter value={100} />
-            </span>
-            <span className="text-xl mt-4 text-gray-700">Million Saved</span>
-          </div>
-        </div>
+      <IndustryInsights />
+
+      <div className="h-screen relative">
+        <FyxitSplitScroll />
       </div>
     </>
   );

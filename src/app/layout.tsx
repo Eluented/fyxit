@@ -4,8 +4,15 @@ import {
   Geist_Mono,
   Archivo_Black,
   Roboto_Mono,
+  Roboto,
+  Lora,
+  Hind,
+  Open_Sans,
+  Nunito,
+  Poppins
 } from "next/font/google";
 import "./globals.css";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +32,53 @@ const archivoBlack = Archivo_Black({
 });
 
 const roboto_mono = Roboto_Mono({
+  weight: "500",
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto-mono",
+});
+
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+  display: "swap",
+});
+
+
+const poppins = Poppins({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+const lora = Lora({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-lora",
+  display: "swap",
+});
+
+const hind = Hind({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-hind",
+  display: "swap",
+});
+
+const openSans = Open_Sans({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+  display: "swap",
+});
+
+const nunito = Nunito({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-nunito",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -43,7 +94,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${archivoBlack.variable} ${roboto_mono.variable} antialiased`}
+        className={`$ ${geistSans.variable} ${geistMono.variable} ${archivoBlack.variable} ${roboto_mono.variable} ${poppins.variable} ${roboto.variable} ${lora.variable} ${hind.variable} ${openSans.variable} ${nunito.variable} antialiased`}
       >
         {children}
       </body>

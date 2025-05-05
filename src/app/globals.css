@@ -3,24 +3,25 @@
 :root {
   --fyx-yellow: #fcac1d;
   --fyx-blue: #374150;
+  font-family: "poppins",
 }
 
 @theme {
-  --color-fyx-yellow: var(--fyx-yellow);
-  --color-fyx-blue: var(--fyx-blue);
-  
-  /* Set default text color */
-  --color-text: var(--fyx-blue);
+  --font-heading: "Archivo Black", sans-serif;
+
+  --font-roboto: "Roboto", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+  --font-poppins: "Poppins", sans-serif;
+
+  --color-fyx-yellow: #fcac1d;
+  --color-fyx-blue: #374150;
 }
 
-@theme inline {
-  --font-sans: var(--font-archivo-black);
-  --font-mono: var(--font-roboto-mono);
-}
+
 
 body {
-  @apply text-fyx-blue; /* This sets default text color */
-  font-family: Arial, Helvetica, sans-serif;
+
+
   background: oklch(98.5% 0.002 247.839);
   color: #f7f8f7;
 }
